@@ -59,7 +59,7 @@ Bitte stelle sicher, dass folgende Tools installiert sind:
 
 ### 2. **Frontend starten:**
 
-Um das **Frontend** lokal ohne Docker zu starten, kannst du den **Angular Development Server** verwenden.
+Um das **Frontend** lokal zu starten, kannst du den **Angular Development Server** verwenden.
 
 ```bash
 cd hotel-booking-ui
@@ -70,6 +70,8 @@ Zugänglich unter: http://localhost:4200
 ```
 
 ### 3. **Backend starten:**
+
+Um das backend lokal starten.
 
 ```bash
 cd hotel_booking_app
