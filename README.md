@@ -69,17 +69,6 @@ ng serve
 Zugänglich unter: http://localhost:4200
 ```
 
-Um das **Frontend** mit Docker und Nginx starten.
-
-```bash
-
-cd hotel-booking-ui
-docker build -t hotel-booking-ui:latest .
-docker run -p 8080:8080 hotel-booking-ui:latest
-
-Zugänglich unter:  http://localhost:8080
-```
-
 ### 3. **Backend starten:**
 
 ```bash
