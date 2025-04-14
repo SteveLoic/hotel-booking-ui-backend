@@ -103,3 +103,27 @@ Dadurch werden:
 
 Swagger UI: http://localhost:5051/api/v1/swagger-ui/index.html  bereitgestellt
 ```
+
+## Standardbenutzer
+
+Für den schnellen Einstieg in die Anwendung bieten wir drei Standardbenutzer an: **Admin** und **Customer**. Diese Benutzer können direkt verwendet werden, um die Funktionalitäten der Anwendung zu testen.
+
+### Standardbenutzer:
+
+#### 1. Admin-Benutzer:
+
+- **email:** `john.smith@test.com`
+- **Password:** `password1234`
+- **Rolle:** `ADMIN`
+
+#### 2. Customer-Benutzer:
+
+- **email:** `heidi.horton@test.com`
+- **Passwort:** `password1234`
+- **Rolle:** `CUSTOMER`
+
+#### 3. Weitere Customer-Benutzer:
+
+- **Benutzername:** `john.doe@test.com`
+- **Passwort:** `password1234`
+- **Rolle:** `CUSTOMER`
