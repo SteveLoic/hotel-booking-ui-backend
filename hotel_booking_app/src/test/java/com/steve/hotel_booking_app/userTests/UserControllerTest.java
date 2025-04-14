@@ -1,4 +1,6 @@
 package com.steve.hotel_booking_app.userTests;
 
-public class UserControllerTest extends Abstrac {
+import com.steve.hotel_booking_app.common.AbstracttionBaseTest;
+
+public class UserControllerTest extends AbstracttionBaseTest {
 }

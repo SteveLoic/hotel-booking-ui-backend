@@ -2,6 +2,8 @@ package com.steve.hotel_booking_app.room;
 
 
 import com.steve.hotel_booking_app.enums.RoomType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,7 +31,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
                 )
                 AND (:roomType IS NULL OR r.roomType = :roomType)
             """)
-    List<Room> findAvailableRooms(
+    Page<Room> findAvailableRooms(
+            Pageable pageable,
             @Param("checkInDate") LocalDate checkInDate,
             @Param("checkOutDate") LocalDate checkOutDate,
             @Param("roomType") RoomType roomType);
@@ -42,5 +45,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
                    OR CAST(r.capacity AS string) LIKE %:searchParam%
                    OR LOWER(r.description) LIKE LOWER(CONCAT('%', :searchParam, '%'))
             """)
-    List<Room> searchRooms(@Param("searchParam") String searchParam);
+    Page<Room> searchRooms(Pageable pageable, @Param("searchParam") String searchParam);
 }

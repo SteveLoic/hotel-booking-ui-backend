@@ -33,6 +33,7 @@ public class AuthController {
          Response response = Response.builder()
                  .status(200)
                  .message("User logged Successfully")
+                 .user(authLoginResponse)
                  .role(authLoginResponse.getUserRole())
                  .token(authLoginResponse.getToken())
                  .isActive(authLoginResponse.isActive())

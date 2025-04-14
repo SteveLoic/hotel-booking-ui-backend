@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookingResponse {
-
+    private Long id;
     private AuthLoginResponse user;
     private RoomResponse room;
     private PaymentStatus paymentStatus;

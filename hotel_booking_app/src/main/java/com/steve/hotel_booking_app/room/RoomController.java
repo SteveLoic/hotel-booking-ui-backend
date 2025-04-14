@@ -1,6 +1,7 @@
 package com.steve.hotel_booking_app.room;
 
 
+import com.steve.hotel_booking_app.common.PageResponse;
 import com.steve.hotel_booking_app.common.Response;
 import com.steve.hotel_booking_app.enums.RoomType;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,32 +23,67 @@ import java.util.List;
 public class RoomController {
 
     private final RoomService roomService;
+
     @GetMapping("/all/rooms/{searchParam}")
     public ResponseEntity<Response> searchRooms(
-            @PathVariable(name = "searchParam") String searchParam
+            @PathVariable(name = "searchParam") String searchParam,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size
     ) {
-        List<RoomResponse> foundedRooms = roomService.searchRooms(searchParam);
+        PageResponse<RoomResponse> foundedRooms = roomService.searchRooms(searchParam, page, size);
         Response response = Response.builder()
                 .status(200)
                 .message("Retrieve all Room Successfully")
-                .roomResponses(foundedRooms)
+                .pageResponse(foundedRooms)
                 .build();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Response> getAllRoom() {
-        List<RoomResponse> allRooms = roomService.getAllRooms();
+    public ResponseEntity<Response> getAllRoom(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size
+    ) {
+        PageResponse<RoomResponse> allRooms = roomService.getAllRooms(page, size);
         Response response = Response.builder()
                 .status(200)
                 .message("Retrieve all Room Successfully")
-                .roomResponses(allRooms)
+                .pageResponse(allRooms)
                 .build();
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/all/rooms/types")
-    public ResponseEntity<Response> getAllRoomsTypes() {
+    @GetMapping("/all/available/rooms")
+    public ResponseEntity<Response> getAllAvailableRooms(
+            @RequestParam(name = "checkinDate") LocalDate checkinDate,
+            @RequestParam(name = "checkoutDate") LocalDate checkoutDate,
+            @RequestParam(name = "roomType", required = false) RoomType roomType,
+            @RequestParam(name = "size", defaultValue = "10") int size,
+            @RequestParam(name = "page", defaultValue = "0") int page
+    ) {
+        PageResponse<RoomResponse> availableRooms = roomService.getAvailableRooms(checkinDate, checkoutDate, roomType, page, size);
+        Response response = Response.builder()
+                .status(200)
+                .message("Retrieve all available Rooms Successfully")
+                .pageResponse(availableRooms)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/room/{roomId}")
+    public ResponseEntity<Response> updateRoom(@PathVariable(value = "roomId") Long roomId) {
+        RoomResponse getRoomById = roomService.getRoomById(roomId);
+        Response response = Response.builder()
+                .status(200)
+                .message("Retrieve room successfully")
+                .roomResponse(getRoomById)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/all/types")
+    public ResponseEntity<Response> getAllRoomsTypes(
+    ) {
         List<RoomType> allRoomsTypes = roomService.getAllRoomTypes();
         Response response = Response.builder()
                 .status(200)
@@ -57,20 +93,6 @@ public class RoomController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/all/available/rooms")
-    public ResponseEntity<Response> getAllAvailableRooms(
-            @RequestParam(name = "checkinDate") LocalDate checkinDate,
-            @RequestParam(name = "checkoutDate") LocalDate checkoutDate,
-            @RequestParam(name = "roomType", required = false) RoomType roomType
-    ) {
-        List<RoomResponse> allAvailableRooms = roomService.getAvailableRooms(checkinDate, checkoutDate, roomType);
-        Response response = Response.builder()
-                .status(200)
-                .message("Retrieve all available Rooms Successfully")
-                .roomResponses(allAvailableRooms)
-                .build();
-        return ResponseEntity.ok(response);
-    }
 
     @PostMapping("/room/add")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -86,23 +108,12 @@ public class RoomController {
 
     @PutMapping("/room/{roomId}/update")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Response> updateRoom(@RequestBody RoomRequest roomRequest, @PathVariable(name = "roomId")Long roomId) {
+    public ResponseEntity<Response> updateRoom(@RequestBody RoomRequest roomRequest, @PathVariable(name = "roomId") Long roomId) {
         RoomResponse updatedRoom = roomService.updateRoom(roomRequest, roomId);
         Response response = Response.builder()
                 .status(200)
                 .message("Room successfully updated")
                 .roomResponse(updatedRoom)
-                .build();
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/room/{roomId}/room")
-    public ResponseEntity<Response> updateRoom(@PathVariable(value = "roomId") Long roomId) {
-        RoomResponse getRoomById = roomService.getRoomById(roomId);
-        Response response = Response.builder()
-                .status(200)
-                .message("Retrieve room successfully")
-                .roomResponse(getRoomById)
                 .build();
         return ResponseEntity.ok(response);
     }
@@ -117,6 +128,5 @@ public class RoomController {
                 .build();
         return ResponseEntity.ok(response);
     }
-
 
 }
