@@ -46,7 +46,18 @@ Die Applikation verwendet MySQL zur Datenspeicherung und ist vollständig docker
 
 ## 🛠️ Setup & Start
 
-### 1. **Frontend starten:**
+## 1. 🧰 Voraussetzungen
+
+Bitte stelle sicher, dass folgende Tools installiert sind:
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- (Optional) [Node.js & Angular CLI](https://angular.io/cli) – für lokale Frontend-Entwicklung
+- (Optional) [Java 17+] – für lokale Backend-Entwicklung
+
+---
+
+### 2. **Frontend starten:**
 
 Um das **Frontend** lokal ohne Docker zu starten, kannst du den **Angular Development Server** verwenden.
 
@@ -69,7 +80,7 @@ docker run -p 8080:8080 hotel-booking-ui:latest
 Zugänglich unter:  http://localhost:8080
 ```
 
-### 2. **Backend starten:**
+### 3. **Backend starten:**
 
 ```bash
 cd hotel_booking_app
@@ -79,16 +90,16 @@ Zugänglich unter: http://localhost:5051
 Swagger-UI: http://localhost:5051/api/v1/swagger-ui/index.html
 ```
 
-### 2. **Mit Docker starten:**
+### 4. **Die Gesamte Anwendung mit Docker Compose starten**
 
 ```bash
 docker-compose up --build
 
-Zugänglich unter:
+Dadurch werden:
 
-Frontend: http://localhost:8080
+(hotel-booking-ui) Das Angular Frontend  auf : http://localhost:8080 bereitgestellt
 
-Backend API: http://localhost:5051
+(hotel-booking-api) Das Spring Boot Backend auf : http://localhost:5051 bereitgestellt
 
-Swagger UI: http://localhost:5051/api/v1/swagger-ui/index.html
+Swagger UI: http://localhost:5051/api/v1/swagger-ui/index.html  bereitgestellt
 ```
