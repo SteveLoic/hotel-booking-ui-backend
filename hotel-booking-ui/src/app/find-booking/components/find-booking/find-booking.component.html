@@ -1,0 +1,99 @@
+<div class="container">
+  @if(bookingstore.error()) {
+  <div class="error">
+    <p>{{ bookingstore.error() }}</p>
+  </div>
+  }
+
+  <h2>Find Booking</h2>
+  <form [formGroup]="form" (ngSubmit)="onHandleSearch()">
+    <div>
+      <input
+        type="text"
+        placeholder="Enter your booking confirmation code"
+        formControlName="confirmationCode"
+      />
+      <button [disabled]="!form.valid" type="submit">Find</button>
+    </div>
+    @if(hasError("confirmationCode", "required")){
+    <div class="error-message">Booking Confirmation is required.</div>
+    }
+  </form>
+  @if(this.bookingstore.currentBookingByReference()) {
+
+  <div class="details">
+    <h3>Booking Details</h3>
+    <p>
+      <strong>Booking Code:</strong>
+      {{ this.bookingstore.currentBookingByReference()?.bookingReference }}
+    </p>
+    <p>
+      <strong>Check-in Date:</strong>
+      {{ this.bookingstore.currentBookingByReference()?.checkedInDate }}
+    </p>
+    <p>
+      <strong>Check-out Date:</strong>
+      {{ this.bookingstore.currentBookingByReference()?.checkedOutDate }}
+    </p>
+    <p>
+      <strong>Payment Status:</strong>
+      {{ this.bookingstore.currentBookingByReference()?.paymentStatus }}
+    </p>
+    <p>
+      <strong>Amount:</strong>
+      {{ this.bookingstore.currentBookingByReference()?.totalPrice }}
+    </p>
+    <p>
+      <strong>Booking Status:</strong>
+      {{ this.bookingstore.currentBookingByReference()?.bookingStatus }}
+    </p>
+
+    <hr />
+    <h3>Booker Details</h3>
+    <div>
+      <p>
+        <strong>First Name:</strong>
+        {{ this.bookingstore.currentBookingByReference()?.user?.firstname }}
+      </p>
+      <p>
+        <strong>Last Name:</strong>
+        {{ this.bookingstore.currentBookingByReference()?.user?.lastname }}
+      </p>
+      <p>
+        <strong>Email:</strong>
+        {{ this.bookingstore.currentBookingByReference()?.user?.email }}
+      </p>
+      <p>
+        <strong>Phone Number:</strong>
+        {{ this.bookingstore.currentBookingByReference()?.user?.phoneNumber }}
+      </p>
+    </div>
+
+    <hr />
+    <h3>Room Details</h3>
+    <div>
+      <p>
+        <strong>Room Number:</strong>
+        {{ this.bookingstore.currentBookingByReference()?.room?.roomNumber }}
+      </p>
+      <p>
+        <strong>Room Type:</strong>
+        {{ this.bookingstore.currentBookingByReference()?.room?.roomType }}
+      </p>
+      <p>
+        <strong>Room Capacity:</strong>
+        {{ this.bookingstore.currentBookingByReference()?.room?.capacity }}
+      </p>
+      <img
+        alt="Room Image"
+        [src]="
+          'assets/rooms/' +
+          this.bookingstore.currentBookingByReference()?.room?.imageUrl
+        "
+        width="300"
+        height="200"
+      />
+    </div>
+  </div>
+  }
+</div>

@@ -1,0 +1,68 @@
+<form [formGroup]="form" (ngSubmit)="onHandleAddRoom()">
+  <div class="container">
+    <h2>Add New Room</h2>
+    @if(roomStore.error()) {
+    <div class="error">{{ roomStore.error() }}</div>
+    } @if(roomStore.successMessage()) {
+    <div class="success">{{ roomStore.successMessage() }}</div>
+    }
+    <div class="form-group">
+      <label>Image Url</label>
+      <select formControlName="imageUrl">
+        <option value="">Select a room type</option>
+        @for (imageUrl of imagesUrls; track $index) {
+        <option [value]="imageUrl">
+          {{ imageUrl }}
+        </option>
+        }
+      </select>
+      @if(hasError("imageUrl", "required")){
+      <div class="error-message">Room number is required.</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Room Type</label>
+      <select formControlName="roomType">
+        <option value="">Select a room type</option>
+        @for (type of roomStore.roomTypes(); track $index) {
+        <option [value]="type">
+          {{ type }}
+        </option>
+        }
+      </select>
+      @if(hasError("roomType", "required")){
+      <div class="error-message">RoomType is required.</div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Room Price</label>
+      <input type="number" formControlName="pricePerNight" min="0" />
+      @if(hasError("pricePerNight", "required")){
+      <div class="error-message">PricePerNight is required.</div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Room Number</label>
+      <input type="number" formControlName="roomNumber" min="0" />
+      @if(hasError("roomNumber", "required")){
+      <div class="error-message">RoomNumber is required.</div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Room Capacity</label>
+      <input type="number" formControlName="capacity" min="0" />
+      @if(hasError("capacity", "required")){
+      <div class="error-message">Capacity is required.</div>
+      }
+    </div>
+    <div class="form-group">
+      <label>Room Description</label>
+      <textarea formControlName="description"></textarea>
+      @if(hasError("description", "required")){
+      <div class="error-message">Description is required.</div>
+      }
+    </div>
+    <button type="submit">Add Room</button>
+  </div>
+</form>

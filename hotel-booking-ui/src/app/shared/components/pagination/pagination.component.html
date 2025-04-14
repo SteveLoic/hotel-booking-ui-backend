@@ -1,0 +1,17 @@
+<div>
+  <ul>
+    @for (number of pageNumbers; track $index) {
+    <li>
+      <button
+        (click)="onPageChange(number)"
+        [ngClass]="{
+          'page-button': true,
+          'current-page': currentPage() === number
+        }"
+      >
+        {{ number }}
+      </button>
+    </li>
+    }
+  </ul>
+</div>

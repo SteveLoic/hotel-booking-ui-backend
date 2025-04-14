@@ -1,0 +1,70 @@
+<div class="home">
+  <header>
+    <img src="assets/images/bg.png" alt="Hotel" />
+    <div class="overlay"></div>
+    <div class="overlay-content">
+      <h1>Welcome to <span class="color">Steve Hotel</span></h1>
+      <h3>Step into a haven of comfort and care</h3>
+    </div>
+  </header>
+  <app-search-room
+    [roomTypes]="roomStore.roomTypes()"
+    [error]="roomStore.error()"
+    (searchParams)="handleSearchRooms($event)"
+  ></app-search-room>
+
+  <app-rooms-resultat
+    [results]="roomStore.rooms() ?? []"
+    [isAdmin]="authStore.role()"
+  ></app-rooms-resultat>
+
+  <h4><a class="rooms" href="/rooms">All Rooms</a></h4>
+
+  <h2>Services at <span class="color">Steve Hotel</span></h2>
+
+  <section>
+    <div class="card">
+      <img src="assets/images/ac.png" alt="Air Conditioning" />
+      <div class="details">
+        <h3 class="title">Air Conditioning</h3>
+        <p class="description">
+          Stay cool and comfortable throughout your stay with our individually
+          controlled in-room air conditioning.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="assets/images/mini-bar.png" alt="Mini Bar" />
+      <div class="details">
+        <h3 class="title">Mini Bar</h3>
+        <p class="description">
+          Enjoy a convenient selection of beverages and snacks stocked in your
+          room's mini bar with no additional cost.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="assets/images/parking.png" alt="Parking" />
+      <div class="details">
+        <h3 class="title">Parking</h3>
+        <p class="description">
+          We offer on-site parking for your convenience. Please inquire about
+          valet parking options if available.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="assets/images/wifi.png" alt="WiFi" />
+      <div class="details">
+        <h3 class="title">WiFi</h3>
+        <p class="description">
+          Stay connected throughout your stay with complimentary high-speed
+          Wi-Fi access available in all guest rooms and public areas.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

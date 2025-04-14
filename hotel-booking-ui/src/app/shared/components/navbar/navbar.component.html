@@ -1,0 +1,33 @@
+<nav>
+  <div class="brand">
+    <a href="/home">Steve Hotel</a>
+  </div>
+  <ul>
+    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/rooms" routerLinkActive="active">Rooms</a></li>
+    <li>
+      <a routerLink="/find-booking" routerLinkActive="active">Find Booking</a>
+    </li>
+    @if (isCustomer) {
+    <li>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    </li>
+    } @if (isAdmin) {
+    <li>
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    </li>
+    } @if (!isAuthenticated) {
+    <li>
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+    </li>
+    } @if (!isAuthenticated) {
+    <li>
+      <a routerLink="/register" routerLinkActive="active">Register</a>
+    </li>
+    } @if (isAuthenticated) {
+    <li (click)="onHandleLogout()">
+      <a routerLinkActive="active">Logout</a>
+    </li>
+    }
+  </ul>
+</nav>

@@ -1,0 +1,46 @@
+<div>
+  <h2>Register</h2>
+  @if(authStore.error()) {
+  <p class="error">{{ authStore.error() }}</p>
+  }
+  <form [formGroup]="form" (ngSubmit)="onHandleSubmit()">
+    <input type="text" placeholder="First Name" formControlName="firstName" />
+    @if(hasError("firstName", "required")){
+    <div class="error-message">FirstName is required.</div>
+    }
+    <input type="text" placeholder="Last Name" formControlName="lastName" />
+    @if(hasError("lastName", "required")){
+    <div class="error-message">LastName is required.</div>
+    }
+    <input type="email" placeholder="Email" formControlName="email" />
+    @if(hasError("email", "required")){
+    <div class="error-message">Email is required.</div>
+    } @if(hasError("email", "email")){
+    <div class="error-message">Email is not valid.</div>
+    }
+    <input type="password" placeholder="Password" formControlName="password" />
+    @if(hasError("password", "required")){
+    <div class="error-message">Password is required.</div>
+    }
+    <input
+      type="tel"
+      placeholder="Phone Number"
+      formControlName="phoneNumber"
+    />
+    @if(hasError("phoneNumber", "required")){
+    <div class="error-message">PhoneNumber is required.</div>
+    }
+    <input type="text" placeholder="Role" formControlName="role" />
+    @if(hasError("role", "required")){
+    <div class="error-message">Role is required.</div>
+    }
+    <button type="submit">Register</button>
+  </form>
+  <p>
+    Already have an account?<a
+      routerLink="/login"
+      routerLinkActive="router-link-active"
+      >Login</a
+    >
+  </p>
+</div>

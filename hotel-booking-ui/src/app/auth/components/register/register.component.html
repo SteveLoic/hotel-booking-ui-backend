@@ -1,0 +1,32 @@
+<div>
+  <h2>Register</h2>
+  @if(authStore.error()) {
+  <p class="error">{{ authStore.error() }}</p>
+  }
+  <form [formGroup]="form" (ngSubmit)="onHandleSubmit()">
+    <input type="text" placeholder="firstname" formControlName="firstName" />
+    @if(hasError("firstname", "required")){
+    <div class="error-message">Firstname is required.</div>
+    }
+    <input type="text" placeholder="lastname" formControlName="lastName" />
+    @if(hasError("lastname", "required")){
+    <div class="error-message">Lastname is required.</div>
+    }
+    <input type="email" placeholder="email" formControlName="email" />
+    @if(hasError("email", "required")){
+    <div class="error-message">Email is required.</div>
+    } @if(hasError("email", "email")){
+    <div class="error-message">Email is not valid.</div>
+    }
+    <input type="password" placeholder="password" formControlName="password" />
+    @if(hasError("password", "required")){
+    <div class="error-message">Password is required.</div>
+    }
+    <input type="tel" placeholder="phonenumber" formControlName="phoneNumber" />
+    @if(hasError("phoneNumber", "required")){
+    <div class="error-message">PhoneNumber is required.</div>
+    }
+    <button type="submit">Register</button>
+  </form>
+  <p>Already have an account? <a routerLink="/login">Login</a></p>
+</div>

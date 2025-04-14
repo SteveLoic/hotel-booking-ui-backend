@@ -1,0 +1,11 @@
+<div class="admin">
+  @if(this.authStore.error()) {
+  <p class="error">{{ this.authStore.error() }}</p>
+  }
+
+  <h1>Welcome, {{ this.authStore.authUser()?.firstname }}</h1>
+  <div class="actions">
+    <button (click)="navigateToManageRooms()">Manage Rooms</button>
+    <button (click)="navigateToManageBookings()">Manage Bookings</button>
+  </div>
+</div>

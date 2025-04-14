@@ -1,0 +1,58 @@
+<div class="profile">
+  @if (authStore.authUser()) {
+  <div>
+    <h2>Welcome, {{ authStore.authUser()?.firstname }}</h2>
+    <div class="actions">
+      <button (click)="onHandleEditProfil()">Edit Profile</button>
+      <button class="logout" (click)="onHandleLogout()">Logout</button>
+    </div>
+    @if (authStore.error()) {
+    <p class="error">{{ authStore.error() }}</p>
+    }
+    <div class="details">
+      <h3>My Profile Details</h3>
+      <p><strong>Email:</strong> {{ authStore.authUser()?.email }}</p>
+      <p>
+        <strong>Phone Number:</strong> {{ authStore.authUser()?.phoneNumber }}
+      </p>
+    </div>
+    <section>
+      <h3>My Booking History</h3>
+      @if(authStore.allBookingByCurrentUser() &&
+      authStore.allBookingByCurrentUser().length > 0){ @for (booking of
+      authStore.allBookingByCurrentUser(); track booking.id) {
+      <div
+        *ngFor="let booking of authStore.allBookingByCurrentUser()"
+        class="item"
+      >
+        <p><strong>Booking Code:</strong> {{ booking?.bookingReference }}</p>
+        <p>
+          <strong>Check-in Date:</strong> {{ booking?.checkedInDate | date }}
+        </p>
+        <p>
+          <strong>Check-out Date:</strong> {{ booking?.checkedOutDate | date }}
+        </p>
+        <p><strong>Payment Status:</strong> {{ booking?.paymentStatus }}</p>
+        <p><strong>Booking Status:</strong> {{ booking?.bookingStatus }}</p>
+        <p><strong>Amount:</strong> {{ booking?.totalPrice | currency }}</p>
+        <p><strong>Room Number:</strong> {{ booking?.room?.roomNumber }}</p>
+        <p><strong>Room Type:</strong> {{ booking?.room?.roomType }}</p>
+        <img
+          [src]="'assets/rooms/' + booking.room.imageUrl"
+          width="300"
+          height="200"
+          alt="Room"
+          [alt]="'Room ' + booking.room.roomNumber"
+        />
+      </div>
+      } } @else {
+      <p>No bookings found.</p>
+      }
+    </section>
+  </div>
+  }@else {
+  <div>
+    <p>Loading profile...</p>
+  </div>
+  }
+</div>

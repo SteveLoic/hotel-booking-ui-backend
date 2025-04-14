@@ -1,0 +1,66 @@
+<div class="details-container">
+  @if(this.bookingStore.successMessage()) {
+  <p class="success-message">{{ this.bookingStore.successMessage() }}</p>
+  } @if (errorUi()) {
+  <p class="error-message">{{ errorUi() }}</p>
+  } @if(this.bookingStore.error()) {
+  <p class="error-message">{{ this.bookingStore.error() }}</p>
+  }
+  <h2 class="room-title">Room Details</h2>
+  <img
+    [src]="'assets/rooms/' + room()?.imageUrl"
+    [alt]="room()?.roomType"
+    class="room-image"
+  />
+  <div class="details-info">
+    <h3>{{ room()?.roomType }}</h3>
+    <p><strong>Room Number:</strong> {{ room()?.roomNumber }}</p>
+    <p><strong>Capacity:</strong> {{ room()?.capacity }}</p>
+    <p><strong>Price:</strong> ${{ room()?.pricePerNight }} / night</p>
+    <p>{{ room()?.description }}</p>
+  </div>
+  <div class="booking-info">
+    <button class="book-now-button" (click)="onToggle()">Select Dates</button>
+    @if(showDatePicker()) {
+    <div class="date-picker-container">
+      <form [formGroup]="form" (ngSubmit)="onHandleConfirmation()">
+        <div class="date-picker">
+          <label>Choose Check-in Date</label>
+          <input type="date" formControlName="checkInDate" [min]="minDate()" />
+        </div>
+
+        <div class="date-picker">
+          <label>Choose Check-out Date</label>
+          <input
+            type="date"
+            formControlName="checkOutDate"
+            [min]="getCheckInValue"
+          />
+        </div>
+        <button type="submit" class="proceed-button">Proceed</button>
+      </form>
+    </div>
+    } @if(showBookingPreview()) {
+    <div class="preview-container">
+      <h3>Booking Preview</h3>
+      <p>
+        <strong>Check-in Date:</strong>
+        {{ getCheckInValue | date : "yyyy-MM-dd" }}
+      </p>
+      <p>
+        <strong>Check-out Date:</strong>
+        {{ getCheckoutValue | date : "yyyy-MM-dd" }}
+      </p>
+      <p><strong>Total Days To Stay:</strong> {{ totalDaysToStay() }}</p>
+      <p><strong>Total Price:</strong> ${{ totalPrice() }}</p>
+      <button (click)="onAcceptBooking()" class="confirm-booking-button">
+        Confirm and Book
+      </button>
+      <button class="cancel-button" (click)="onCancelBookingPreview()">
+        Cancel
+      </button>
+    </div>
+
+    }
+  </div>
+</div>

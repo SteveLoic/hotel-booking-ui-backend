@@ -1,0 +1,31 @@
+<section>
+  @if ((results() ?? []).length > 0) {
+  <div>
+    @for (room of results(); track room.id) {
+    <div class="item" [attr.key]="room.id">
+      <img
+        [src]="'assets/rooms/' + room.imageUrl"
+        width="300"
+        height="200"
+        [alt]="'Room ' + room.roomNumber"
+      />
+
+      <div class="details">
+        <h3>{{ room.roomType }}</h3>
+        <p>Price: ${{ room.pricePerNight }}/Night</p>
+        <p>Description: {{ room.description }}</p>
+      </div>
+      <div class="book-now">
+        @if (isAdmin() === 'ADMIN') {
+        <button (click)="onHandleNavigateToEditRoom(room.id)">Edit Room</button>
+        }@else {
+        <button (click)="onHandleNavigateToRoomDetails(room.id)">
+          View/Book Now
+        </button>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  }
+</section>

@@ -1,0 +1,30 @@
+<div class="container">
+  @if(roomStore.error()) {
+  <p class="error-message">{{ roomStore.error() }}</p>
+  }
+  <h2>All Rooms</h2>
+  <div class="filter">
+    <form [formGroup]="form">
+      <label>Filter By Room Type</label>
+      <select formControlName="selectedRoomType">
+        <option value="">All</option>
+        @for (type of roomStore.roomTypes(); track $index) {
+        <option [value]="type">
+          {{ type }}
+        </option>
+        }
+      </select>
+    </form>
+  </div>
+  <app-search-room
+    [roomTypes]="roomStore.roomTypes()"
+    [error]="roomStore.error()"
+    (searchParams)="handleSearchRooms($event)"
+  ></app-search-room>
+  <app-rooms-resultat
+    [results]="
+      filteredRooms().length > 0 ? filteredRooms() : roomStore.rooms() ?? []
+    "
+    [isAdmin]="authStore.role()"
+  ></app-rooms-resultat>
+</div>

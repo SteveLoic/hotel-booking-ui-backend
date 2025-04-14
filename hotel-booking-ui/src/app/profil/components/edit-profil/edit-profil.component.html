@@ -1,0 +1,16 @@
+<div class="profile">
+  <h2>Edit Profile</h2>
+  @if (authStore.error()) {
+  <p class="error">{{ authStore.error() }}</p>
+  } @if (authStore.authUser()) {
+  <div>
+    <p><strong>First Name:</strong> {{ authStore.authUser()?.firstname }}</p>
+    <p><strong>Last Name:</strong> {{ authStore.authUser()?.lastname }}</p>
+    <p><strong>Email:</strong> {{ authStore.authUser()?.email }}</p>
+    <p>
+      <strong>Phone Number:</strong> {{ authStore.authUser()?.phoneNumber }}
+    </p>
+    <button (click)="onHandleDeleteProfile()">Delete My Account</button>
+  </div>
+  }
+</div>

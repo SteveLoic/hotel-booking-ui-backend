@@ -1,0 +1,27 @@
+<div class="all-rooms">
+  <h2>All Rooms</h2>
+  <div class="filter-div">
+    <form [formGroup]="form">
+      <div class="filter-child">
+        <label>Filter by Room Type:</label>
+        <select formControlName="selectedRoomType">
+          <option value="">All</option>
+          @for (type of roomStore.roomTypes(); track $index) {
+          <option [value]="type">
+            {{ type }}
+          </option>
+          }
+        </select>
+        <button type="button" (click)="onHandleNavigateToAddRoom()">
+          Add Room
+        </button>
+      </div>
+    </form>
+  </div>
+  <app-rooms-resultat
+    [isAdmin]="authStore.role()"
+    [results]="
+      filteredRooms().length > 0 ? filteredRooms() : roomStore.rooms() ?? []
+    "
+  ></app-rooms-resultat>
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+  @if(bookingStore.error()) {
+  <div class="error">{{ bookingStore.error() }}</div>
+  }
+  <h2>All Bookings</h2>
+  <form [formGroup]="form">
+    <div class="search">
+      <label>Filter by Booking Number:</label>
+      <input
+        type="text"
+        formControlName="searchTerm"
+        placeholder="Enter booking number"
+      />
+    </div>
+  </form>
+
+  <div class="results">
+    @for (booking of bookingStore.bookings(); track $index) {
+    <div class="result-item">
+      <p><strong>Booking Code:</strong> {{ booking.bookingReference }}</p>
+      <p><strong>Check In Date:</strong> {{ booking.checkedInDate }}</p>
+      <p><strong>Check Out Date:</strong> {{ booking.checkedOutDate }}</p>
+      <p><strong>Total Price:</strong> {{ booking.totalPrice }}</p>
+      <p><strong>Payment Status:</strong> {{ booking.paymentStatus }}</p>
+      <p><strong>Booking Status:</strong> {{ booking.bookingStatus }}</p>
+      <button (click)="manageBooking(booking.bookingReference)">
+        Manage Booking
+      </button>
+    </div>
+    }
+  </div>
+</div>

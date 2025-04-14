@@ -1,0 +1,20 @@
+<div>
+  <h2>Login</h2>
+  @if(authStore.error()) {
+  <p class="error-message">{{ authStore.error() }}</p>
+  }
+  <form [formGroup]="form" (ngSubmit)="onHandleSubmit()">
+    <input type="email" placeholder="email" formControlName="email" />
+    @if(hasError("email", "required")){
+    <div class="error-message">email is required.</div>
+    } @if(hasError("email", "email")){
+    <div class="error-message">email is not valid.</div>
+    }
+    <input type="password" placeholder="password" formControlName="password" />
+    @if(hasError("password", "required")){
+    <div class="error-message">password is required.</div>
+    }
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account? <a routerLink="/register">Register</a></p>
+</div>
