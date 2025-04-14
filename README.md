@@ -1,8 +1,8 @@
 # 🌐 Fullstack Anwendung – Angular + Spring Boot + MySQL + Docker
 
 # Beschreibung:
-Hotel Buchung ist eine webbasierte Anwendung, die Nutzern ermöglicht, Hotels und Unterkünfte zu suchen, zu vergleichen und zu buchen
 
+Hotel Buchung ist eine webbasierte Anwendung, die Nutzern ermöglicht, Hotels und Unterkünfte zu suchen, zu vergleichen und zu buchen
 
 Eine moderne Fullstack-Webanwendung mit Angular (inkl. Signals und NgRx Signal Store) im Frontend und einem Spring Boot Backend mit JWT-Authentifizierung,
 rollenbasierter Autorisierung sowie integrierter OpenAPI-Dokumentation.
@@ -40,22 +40,9 @@ Die Applikation verwendet MySQL zur Datenspeicherung und ist vollständig docker
 
 ---
 
-## 🛠️ Projekstruktur
+## Projektstruktur
 
-├── backend/
-│ ├── Dockerfile
-│ ├── docker-compose.yml
-│ ├── src/
-│ ├── pom.xml
-│ ├── target/
-│ └── application.properties
-├── frontend/
-│ ├── Dockerfile
-│ ├── src/
-│ ├── package.json
-│ ├── angular.json
-│ └── ngrx-signalstore-config.ts
-└── docker-compose.yml
+├── backend/ │ ├── Dockerfile │ ├── docker-compose.yml │ ├── src/ │ ├── pom.xml │ ├── target/ │ └── application.properties ├── frontend/ │ ├── Dockerfile │ ├── src/ │ ├── package.json │ ├── angular.json │ └── ngrx-signalstore-config.ts └── docker-compose.yml
 
 ## 🛠️ Setup & Start
 
